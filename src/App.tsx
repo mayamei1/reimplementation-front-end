@@ -5,7 +5,6 @@ import CreateTeams from "pages/Assignments/CreateTeams";
 import ViewDelayedJobs from "pages/Assignments/ViewDelayedJobs";
 import ViewReports from "pages/Assignments/ViewReports";
 import ViewScores from "pages/Assignments/ViewScores";
-import ViewSubmissions from "pages/Assignments/ViewSubmissions";
 import Courses from "pages/Courses/Course";
 import CourseEditor from "pages/Courses/CourseEditor";
 import { loadCourseInstructorDataAndInstitutions } from "pages/Courses/CourseUtil";
@@ -17,6 +16,7 @@ import { loadParticipantDataRolesAndInstitutions } from "pages/Participants/part
 import EditProfile from "pages/Profile/Edit";
 import Reviews from "pages/Reviews/reviews";
 import SubmissionsView from "pages/Submissions/SubmissionsView";
+import SubmissionView from "pages/Submissions/SubmissionView";
 import TA from "pages/TA/TA";
 import TAEditor from "pages/TA/TAEditor";
 import { loadTAs } from "pages/TA/TAUtil";
@@ -72,7 +72,7 @@ function App() {
         },
         {
           path: "assignments/edit/:id/viewsubmissions",
-          element: <ViewSubmissions />,
+          element: <SubmissionView />,
           loader: loadAssignment,
         },
         {
