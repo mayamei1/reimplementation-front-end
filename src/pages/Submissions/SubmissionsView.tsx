@@ -13,40 +13,41 @@ const SubmissionView = () => {
   useEffect(() => {
     // Simulating data fetching
     const fetchSubmissions = async () => {
-      const data = [
-        {
-          id: 1,
-          teamName: "Anonymized_Team_38121",
-          assignment: "Assignment 1",
-          members: [
-            { name: "Student 10566", id: 10566 },
-            { name: "Student 10559", id: 10559 },
-            { name: "Student 10359", id: 10359 },
-          ],
-          links: [
-            { url: "https://github.com/example/repo", displayName: "GitHub Repository" },
-            { url: "http://google.com", displayName: "Submission Link" },
-          ],
-          fileInfo: [
-            { name: "README.md", size: "14.9 KB", dateModified: "2024-10-03 23:36:57" },
-          ],
-        },
-        {
-          id: 2,
-          teamName: "Anonymized_Team_38122",
-          assignment: "Assignment 2",
-          members: [
-            { name: "Student 10593", id: 10593 },
-            { name: "Student 10623", id: 10623 },
-          ],
-          links: [
-            { url: "https://github.com/example/repo2", displayName: "GitHub Repository" },
-          ],
-          fileInfo: [
-            { name: "README.md", size: "11.7 KB", dateModified: "2024-10-01 12:15:00" },
-          ],
-        },
-      ];
+      const date = new Date(Date.parse('04 Dec 2021 00:12:00 GMT'));
+      const data = Array.from({ length: 23 }, (_, i) => {
+        const id = i + 1;
+        const teamNumber = 38121 + i;
+        const assignmentNumber = (i % 5) + 1;
+        const studentCount = (i % 3) + 1;
+        const currentDate = new Date(new Date().setDate(date.getDate() + i));
+      
+        const members = Array.from({ length: studentCount }, (_, j) => ({
+          name: `Student ${10000 + i * 10 + j}`,
+          id: 10000 + i * 10 + j,
+        }));
+      
+        const links = [
+          { url: `https://github.com/example/repo${id}`, displayName: "GitHub Repository" },
+          { url: `http://example.com/submission${id}`, displayName: "Submission Link" },
+        ];
+      
+        const fileInfo = [
+          {
+            name: `README.md`,
+            size: `${(Math.random() * 15 + 10).toFixed(1)} KB`,
+            dateModified: formatDate(currentDate),
+          },
+        ];
+      
+        return {
+          id,
+          teamName: `Anonymized_Team_${teamNumber}`,
+          assignment: `Assignment ${assignmentNumber}`,
+          members,
+          links,
+          fileInfo,
+        };
+      });
 
       setSubmissions(data);
       setFilteredSubmissions(data);
@@ -54,6 +55,20 @@ const SubmissionView = () => {
 
     fetchSubmissions();
   }, []);
+
+  const formatDate = (date: Date) => {
+      const padZero = (num: number) => String(num).padStart(2, '0');
+    
+      const year = String(date.getFullYear()) // Last two digits of the year
+      const month = padZero(date.getMonth() + 1); // Months are zero-based, so we add 1
+      const day = padZero(date.getDate());
+    
+      const hours = padZero(date.getHours());
+      const minutes = padZero(date.getMinutes());
+      const seconds = padZero(date.getSeconds());
+    
+      return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+  }
 
   const handleGradeClick = (id: number) => {
     console.log(`Assign Grade clicked for submission ID ${id}`);
