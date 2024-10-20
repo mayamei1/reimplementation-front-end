@@ -70,13 +70,6 @@ const SubmissionView: React.FC = () => {
           />
         </Col>
       </Row>
-      {/* <Row>
-        <Col className="text-right">
-          <Button variant="outline-secondary" onClick={handleClose} style={{ marginRight: '10px' }}>
-            Close
-          </Button>
-        </Col>
-      </Row> */}
     </Container>
   );
 };
