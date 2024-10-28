@@ -17,7 +17,6 @@ import EditProfile from "pages/Profile/Edit";
 import Reviews from "pages/Reviews/reviews";
 import SubmissionsView from "pages/Submissions/SubmissionsView";
 import SubmissionView from "pages/Submissions/SubmissionView";
-import SubmissionHistoryView from "./pages/Submissions/SubmissionHistoryView";
 import TA from "pages/TA/TA";
 import TAEditor from "pages/TA/TAEditor";
 import { loadTAs } from "pages/TA/TAUtil";
@@ -76,10 +75,6 @@ function App() {
           element: <SubmissionView />,
           loader: loadAssignment,
         },
-		{
-		  path: "submissions/history/:submissionId",
-		  element: <ProtectedRoute element={<SubmissionHistoryView />} leastPrivilegeRole={ROLE.TA} />,
-		},
         {
           path: "assignments/edit/:id/viewscores",
           element: <ViewScores />,
