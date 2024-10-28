@@ -102,7 +102,7 @@ const SubmissionEntry = ({ onGradeClick }: { onGradeClick: (id: number) => void 
       id: 'history',
       header: () => 'History',
       cell: (info) => (
-        <Link to={`/history/${info.row.original.id}`}>History</Link>
+        <Link to={`/submissions/history/${info.row.original.id}`}>History</Link>
       ),
       enableSorting: false,
       enableColumnFilter: false,
