@@ -48,9 +48,10 @@ const SubmissionEntry = ({ onGradeClick }: { onGradeClick: (id: number) => void 
       cell: (info) =>
         info.getValue().map((member) => (
           <div key={member.id}>
-            <Link to={`/profile/${member.id}`}>
+            {/* This can be used to link to the users profile once the profile component exists */}
+            {/* <Link to={`/profile/${member.id}`}> */}
               {member.name} (Student {member.id})
-            </Link>
+            {/* </Link> */}
           </div>
         )),
       size: 35,
