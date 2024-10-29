@@ -52,39 +52,39 @@ const SubmissionHistoryView = () => {
   useEffect(() => {
     const dummyData: HistoryEntry[] = [
       {
-        teamId: 38121,
+        teamId: 12345,
         operation: 'Submit Hyperlink',
-        user: 'adgorkar',
-        content: 'https://github.ncsu.edu/adgorkar/CSC_ECE_517_Fall2024_Program_2',
-        created: '2024-09-17 22:38:09 -0400'
+        user: 'Test_User',
+        content: 'https://github.ncsu.edu/masonhorne/reimplementation-front-end',
+        created: '2024-09-17 22:38:09'
       },
       {
-        teamId: 38121,
+        teamId: 12345,
         operation: 'Submit Hyperlink',
-        user: 'adgorkar',
+        user: 'Test_User',
         content: 'http://152.7.176.240:8080/',
-        created: '2024-09-27 18:32:10 -0400'
+        created: '2024-09-27 18:32:10'
       },
       {
-        teamId: 38121,
+        teamId: 12345,
         operation: 'Submit File',
-        user: 'adgorkar',
+        user: 'Test_User',
         content: 'README.md',
-        created: '2024-09-29 17:52:24 -0400'
+        created: '2024-09-29 17:52:24'
       },
       {
-        teamId: 38121,
+        teamId: 12345,
         operation: 'Remove File',
-        user: 'adgorkar',
+        user: 'Test_User',
         content: 'README.md',
-        created: '2024-10-03 23:36:03 -0400'
+        created: '2024-10-03 23:36:03'
       },
       {
-        teamId: 38121,
+        teamId: 12345,
         operation: 'Submit File',
-        user: 'adgorkar',
+        user: 'Test_User',
         content: 'README_4_.md',
-        created: '2024-10-03 23:36:57 -0400'
+        created: '2024-10-03 23:36:57'
       }
     ];
     setHistory(dummyData);
