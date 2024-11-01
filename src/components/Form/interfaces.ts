@@ -16,6 +16,7 @@ export interface IFormProps {
   tooltipPlacement?: "top" | "right" | "bottom" | "left";
   inputGroupPrepend?: ReactNode;
   inputGroupAppend?: ReactNode;
+  
 }
 
 export interface IFormOption {
@@ -25,6 +26,7 @@ export interface IFormOption {
 
 export interface IFormPropsWithOption extends IFormProps {
   options: IFormOption[];
+  onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 export interface IFormikFieldProps {
