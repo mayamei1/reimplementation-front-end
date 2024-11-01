@@ -7,8 +7,9 @@ import useAPI from "../../hooks/useAPI";
 import { ICourseResponse as ICourse } from "../../utils/interfaces";
 
 /**
- * @author Atharva Thorve, on December, 2023
- * @author Mrityunjay Joshi on December, 2023
+ *  @author Suraj Raghu Kumar, on Oct, 2024 
+ * @author Yuktasree Muppala on Oct, 2024
+ * @author Harvardhan Patil on Oct, 2024
  */
 
 // DeleteCourse Component: Modal for deleting a course
@@ -32,18 +33,22 @@ const DeleteCourse: React.FC<IDeleteCourse> = ({ courseData, onClose }) => {
   useEffect(() => {
     if (courseError) dispatch(alertActions.showAlert({ variant: "danger", message: courseError }));
   }, [courseError, dispatch]);
-
+ 
+  //Added this method to be called for success and achieve LSP and DRY
+  const handleDeleteSuccess = () => {
+    setShow(false);
+    dispatch(
+      alertActions.showAlert({
+        variant: "success",
+        message: `Course ${courseData.name} deleted successfully!`,
+      })
+    );
+    onClose();
+  };
   // Close modal if course is deleted
   useEffect(() => {
     if (deletedCourse?.status && deletedCourse?.status >= 200 && deletedCourse?.status < 300) {
-      setShow(false);
-      dispatch(
-        alertActions.showAlert({
-          variant: "success",
-          message: `Course ${courseData.name} deleted successfully!`,
-        })
-      );
-      onClose();
+      handleDeleteSuccess();
     }
   }, [deletedCourse?.status, dispatch, onClose, courseData.name]);
 
