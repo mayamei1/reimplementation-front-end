@@ -2,7 +2,7 @@ import { Row as TRow } from "@tanstack/react-table";
 import Table from "components/Table/Table";
 import useAPI from "hooks/useAPI";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row, Tooltip } from "react-bootstrap";
 import { RiHealthBookLine } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
@@ -12,17 +12,22 @@ import { ICourseResponse, ROLE } from "../../utils/interfaces";
 import { courseColumns as COURSE_COLUMNS } from "./CourseColumns";
 import CopyCourse from "./CourseCopy";
 import DeleteCourse from "./CourseDelete";
-import { formatDate, mergeDataAndNames } from "./CourseUtil";
+import { formatDate, mergeDataAndNamesAndInstructors } from "./CourseUtil";
+import { OverlayTrigger } from "react-bootstrap";
+
+import { ICourseResponse as ICourse } from "../../utils/interfaces";
 
 // Courses Component: Displays and manages courses, including CRUD operations.
 
 /**
- * @author Atharva Thorve, on December, 2023
- * @author Mrityunjay Joshi on December, 2023
+   @author Suraj Raghu Kumar, on Oct, 2024 
+ * @author Yuktasree Muppala on Oct, 2024
+ * @author Harvardhan Patil on Oct, 2024
  */
 const Courses = () => {
   const { error, isLoading, data: CourseResponse, sendRequest: fetchCourses } = useAPI();
-  const { data: InstitutionResponse, sendRequest: fetchInstitutions } = useAPI();
+  const { data: InstitutionResponse, sendRequest: fetchInstitutions} = useAPI();
+  const { data: InstructorResponse, sendRequest: fetchInstructors} = useAPI();
   const auth = useSelector(
     (state: RootState) => state.authentication,
     (prev, next) => prev.isAuthenticated === next.isAuthenticated
@@ -31,7 +36,19 @@ const Courses = () => {
   const location = useLocation();
   const dispatch = useDispatch();
 
-  // State for delete and copy confirmation modals
+  // show course
+  const [showDetailsModal, setShowDetailsModal] = useState<boolean>(false);
+  const [selectedCourse, setSelectedCourse] = useState<ICourse | null>(null);
+  
+  // Utility function to manage modals, adhering to Open-closed-principle
+const showModal = (setModalState: React.Dispatch<React.SetStateAction<boolean>>, 
+  setData?: (data: ICourse | null) => void, data?: ICourse) => {
+  if (setData) {
+      setData(data || null);
+  }
+  setModalState(true);
+};
+const handleShowDetails = (course: ICourse) => showModal(setShowDetailsModal, setSelectedCourse, course);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState<{
     visible: boolean;
     data?: ICourseResponse;
@@ -44,19 +61,13 @@ const Courses = () => {
 
   useEffect(() => {
     // ToDo: Fix this API in backend so that it the institution name along with the id. Similar to how it is done in users.
-    if (!showDeleteConfirmation.visible || !showCopyConfirmation.visible) {
+    if (!showDeleteConfirmation.visible || !showCopyConfirmation.visible){
       fetchCourses({ url: `/courses` });
       // ToDo: Remove this API call later after the above ToDo is completed
       fetchInstitutions({ url: `/institutions` });
+      fetchInstructors({ url: `/users` });
     }
-  }, [
-    fetchCourses,
-    fetchInstitutions,
-    location,
-    showDeleteConfirmation.visible,
-    auth.user.id,
-    showCopyConfirmation.visible,
-  ]);
+  }, [fetchCourses, fetchInstitutions,fetchInstructors, location, showDeleteConfirmation.visible, auth.user.id, showCopyConfirmation.visible]);
 
   // Error alert for API errors
   useEffect(() => {
@@ -66,10 +77,7 @@ const Courses = () => {
   }, [error, dispatch]);
 
   // Callbacks for handling delete and copy confirmation modals
-  const onDeleteCourseHandler = useCallback(
-    () => setShowDeleteConfirmation({ visible: false }),
-    []
-  );
+  const onDeleteCourseHandler = useCallback(() => setShowDeleteConfirmation({ visible: false }), []);
 
   const onCopyCourseHandler = useCallback(() => setShowCopyConfirmation({ visible: false }), []);
 
@@ -85,8 +93,7 @@ const Courses = () => {
   );
 
   const onDeleteHandle = useCallback(
-    (row: TRow<ICourseResponse>) =>
-      setShowDeleteConfirmation({ visible: true, data: row.original }),
+    (row: TRow<ICourseResponse>) => setShowDeleteConfirmation({ visible: true, data: row.original }),
     []
   );
 
@@ -94,8 +101,9 @@ const Courses = () => {
     (row: TRow<ICourseResponse>) => setShowCopyConfirmation({ visible: true, data: row.original }),
     []
   );
-
+  
   const tableColumns = useMemo(
+    
     () => COURSE_COLUMNS(onEditHandle, onDeleteHandle, onTAHandle, onCopyHandle),
     [onDeleteHandle, onEditHandle, onTAHandle, onCopyHandle]
   );
@@ -110,7 +118,12 @@ const Courses = () => {
     [InstitutionResponse?.data, isLoading]
   );
 
-  tableData = mergeDataAndNames(tableData, institutionData);
+  const instructorData = useMemo(
+    () => (isLoading || !InstructorResponse?.data ? [] : InstructorResponse.data),
+    [InstructorResponse?.data, isLoading]
+  );
+  
+  tableData = mergeDataAndNamesAndInstructors(tableData, institutionData, instructorData);
 
   const formattedTableData = tableData.map((item: any) => ({
     ...item,
@@ -118,50 +131,89 @@ const Courses = () => {
     updated_at: formatDate(item.updated_at),
   }));
 
-  // Render the Courses component
+    // `auth.user.id` holds the ID of the logged-in user
+    const loggedInUserId = auth.user.id;
+    const loggedInUserRole = auth.user.role;
 
+    const visibleCourses = useMemo(() => {
+      // Show all courses to admin and superadmin roles
+      if (loggedInUserRole === ROLE.ADMIN.valueOf() || loggedInUserRole === ROLE.SUPER_ADMIN.valueOf()) {
+        return formattedTableData;
+      }
+      // Otherwise, only show courses where the logged-in user is the instructor
+      return formattedTableData.filter((CourseResponse: { instructor_id: number; }) => CourseResponse.instructor_id === loggedInUserId);
+    }, [formattedTableData, loggedInUserRole]);
+
+  // Render the Courses component
+  
   return (
     <>
       <Outlet />
       <main>
         <Container fluid className="px-md-4">
-          <Row className="mt-md-2 mb-md-2">
+          <Row className="mt-4 mb-4">
             <Col className="text-center">
-              <h1>Manage Courses</h1>
+              <h1 className="text-dark" style={{ fontSize: '2rem', fontWeight: '600' }}>
+                {auth.user.role === ROLE.INSTRUCTOR.valueOf() ? (
+                  <>Instructed by: {auth.user.full_name}</>
+                ) : auth.user.role === ROLE.TA.valueOf() ? (
+                  <>Assisted by: {auth.user.full_name}</>
+                ) : (
+                  <>Manage Courses</>
+                )}
+              </h1>
             </Col>
             <hr />
           </Row>
-          <Row>
-            <Col md={{ span: 1, offset: 11 }} style={{ paddingBottom: "10px" }}>
-              <Button variant="outline-success" onClick={() => navigate("new")}>
-                <RiHealthBookLine />
+
+          <Row className="mb-4 justify-content-end">
+            <Col xs="auto">
+              <Button
+                variant="success"
+                size="lg"
+                onClick={() => navigate("new")}
+                aria-label="Add New Course"
+                style={{
+                  fontSize: '1rem',
+                  padding: '8px 24px',
+                  borderRadius: '10px',
+                  boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                <RiHealthBookLine style={{ marginRight: '8px', fontSize: '1.4rem' }} />
+                Add Course
               </Button>
             </Col>
-            {showDeleteConfirmation.visible && (
-              <DeleteCourse
-                courseData={showDeleteConfirmation.data!}
-                onClose={onDeleteCourseHandler}
-              />
-            )}
-            {showCopyConfirmation.visible && (
-              <CopyCourse courseData={showCopyConfirmation.data!} onClose={onCopyCourseHandler} />
-            )}
           </Row>
+
+          {showDeleteConfirmation.visible && (
+            <DeleteCourse courseData={showDeleteConfirmation.data!} onClose={onDeleteCourseHandler} />
+          )}
+          {showCopyConfirmation.visible && (
+            <CopyCourse courseData={showCopyConfirmation.data!} onClose={onCopyCourseHandler} />
+          )}
+
           <Row>
             <Table
               showGlobalFilter={false}
-              data={formattedTableData}
+              data={visibleCourses}
               columns={tableColumns}
               columnVisibility={{
                 id: false,
                 institution: auth.user.role === ROLE.SUPER_ADMIN.valueOf(),
+                instructor: auth.user.role === ROLE.SUPER_ADMIN.valueOf(),
               }}
             />
           </Row>
         </Container>
       </main>
+
+      
     </>
-  );
+);
+
 };
 
 export default Courses;
