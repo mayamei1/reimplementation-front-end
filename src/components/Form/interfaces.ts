@@ -16,7 +16,6 @@ export interface IFormProps {
   tooltipPlacement?: "top" | "right" | "bottom" | "left";
   inputGroupPrepend?: ReactNode;
   inputGroupAppend?: ReactNode;
-  
 }
 
 export interface IFormOption {

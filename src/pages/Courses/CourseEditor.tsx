@@ -88,7 +88,7 @@ const CourseEditor: React.FC<IEditor> = ({ mode }) => {
     }
   }, [users, selectedInstitutionId]); // Re-run this effect when users or selectedInstitutionId changes
   
-  // Handle institution selection change and implement Single Responsibility Principle
+  // Handle institution selection change
 const handleInstitutionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
   const institutionId = Number(event.target.value);
   setSelectedInstitutionId(institutionId);
