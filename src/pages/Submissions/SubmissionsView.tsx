@@ -85,11 +85,15 @@ const SubmissionView = () => {
   };
 
   return (
-    <Container className="mt-4">
+    <Container className="mt-4" style={{display: 'flex', flexDirection: 'column'}}>
       <Row>
-        <Col md={3}>
+        <Col>
           <h1>Submissions</h1>
           <hr />
+        </Col>
+      </Row>
+      <Row>
+        <Col md={3}>
           <Form.Group controlId="assignmentFilter">
             <Form.Label>Filter by Assignment</Form.Label>
             <Form.Control as="select" value={assignmentFilter} onChange={(e) => handleAssignmentChange(e as any)}>
