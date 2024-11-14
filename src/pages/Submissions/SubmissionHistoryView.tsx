@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
-import { Container } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
 import {
   createColumnHelper,
   flexRender,
   getCoreRowModel,
   useReactTable,
 } from '@tanstack/react-table';
+import { useEffect, useState } from 'react';
+import { Container } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
 
 interface HistoryEntry {
   teamId: number;
@@ -103,7 +103,7 @@ const SubmissionHistoryView = () => {
           <thead>
             <tr>
               <th colSpan={5} style={{ border: 'none' }}>
-                <h2>Submission Record</h2>
+                <h2>Submission History</h2>
               </th>
             </tr>
             {table.getHeaderGroups().map(headerGroup => (
