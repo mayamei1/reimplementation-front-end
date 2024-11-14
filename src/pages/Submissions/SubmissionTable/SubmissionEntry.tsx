@@ -59,45 +59,39 @@ const SubmissionEntry = ({ onGradeClick }: { onGradeClick: (id: number) => void 
       enableColumnFilter: false, 
       enableGlobalFilter: false, 
     }),
-
-    // Links column: No search, no sorting
-    columnHelper.accessor('links', {
+    // Links and File Info column: No search, no sorting
+    columnHelper.accessor(row => ({ links: row.links, fileInfo: row.fileInfo }), {
+      id: 'links',
       header: () => 'Links',
       cell: (info) => (
+      <div>
+        {info.getValue().links.map((link, idx) => (
+          <div key={idx}>
+            <a href={link.url}>{link.displayName}</a>
+          </div>
+        ))}
+        <br/>
         <div>
-          {info.getValue().map((link, idx) => (
-            <div key={idx}>
-              <a href={link.url}>{link.displayName}</a>
+          <div style={{ display: 'flex', fontWeight: 'bold' }}>
+            <div style={{ width: '33%' }}>Name</div>
+            <div style={{ width: '33%' }}>Size</div>
+            <div style={{ width: '33%' }}>Date Modified</div>
+          </div>
+          {info.getValue().fileInfo.map((file, idx) => (
+            <div key={idx} style={{ display: 'flex' }}>
+              <div style={{ width: '33%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{file.name}</div>
+              <div style={{ width: '33%' }}>{file.size}</div>
+              <div style={{ width: '33%' }}>{file.dateModified}</div>
             </div>
           ))}
         </div>
+      </div>
       ),
-      size: 15,
+      size: 40,
       enableSorting: false,
       enableColumnFilter: false,
       enableGlobalFilter: false,
     }),
-
-    // File Info column: No search, no sorting
-    columnHelper.accessor('fileInfo', {
-      header: () => 'File Info',
-      cell: (info) => (
-        <div>
-          {info.getValue().map((file, idx) => (
-            <div key={idx}>
-              <div>{file.name}</div>
-              <div>Size: {file.size}</div>
-              <div>Date Modified: {file.dateModified}</div>
-            </div>
-          ))}
-        </div>
-      ),
-      size: 25,
-      enableSorting: false,
-      enableColumnFilter: false,
-      enableGlobalFilter: false,
-    }),
-
     // History column: Links to history pages (No search or sorting)
     columnHelper.display({
       id: 'history',
