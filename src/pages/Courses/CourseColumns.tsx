@@ -3,6 +3,8 @@ import { Button } from "react-bootstrap";
 import { BsPencilFill, BsPersonXFill } from "react-icons/bs";
 import { MdContentCopy, MdDelete } from "react-icons/md";
 import { ICourseResponse as ICourse } from "../../utils/interfaces";
+import ColumnButton from "../../components/ColumnButton";
+
 
 /**
  * @author Atharva Thorve, on December, 2023
@@ -53,28 +55,41 @@ export const courseColumns = (handleEdit: Fn, handleDelete: Fn, handleTA: Fn, ha
     header: "Actions",
     cell: ({ row }) => (
       <>
-        <Button variant="outline-warning" size="sm" onClick={() => handleEdit(row)}>
-          <BsPencilFill />
-        </Button>
-        <Button
+        <ColumnButton
+          id="edit"
+          variant="outline-warning"
+          size="sm"
+          onClick={() => handleEdit(row)}
+          tooltip="Edit this course"
+          icon={<BsPencilFill />}
+        />
+        <ColumnButton
+          id="delete"
           variant="outline-danger"
           size="sm"
           className="ms-sm-2"
           onClick={() => handleDelete(row)}
-        >
-          <MdDelete />
-        </Button>
-        <Button variant="outline-info" size="sm" className="ms-sm-2" onClick={() => handleTA(row)}>
-          <BsPersonXFill />
-        </Button>
-        <Button
+          tooltip="Delete this course"
+          icon={<MdDelete />}
+        />
+        <ColumnButton
+          id="assign-ta"
+          variant="outline-info"
+          size="sm"
+          className="ms-sm-2"
+          onClick={() => handleTA(row)}
+          tooltip="Assign a TA to this course"
+          icon={<BsPersonXFill />}
+        />
+        <ColumnButton
+          id="copy"
           variant="outline-primary"
           size="sm"
           className="ms-sm-2"
           onClick={() => handleCopy(row)}
-        >
-          <MdContentCopy />
-        </Button>
+          tooltip="Copy course details"
+          icon={<MdContentCopy />}
+        />
       </>
     ),
   }),
