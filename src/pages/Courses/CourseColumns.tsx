@@ -6,7 +6,7 @@ import { ICourseResponse as ICourse } from "../../utils/interfaces";
  * Author: Suraj Raghu Kumar on October 27, 2023
    Author: Yuktasree Muppala on October 27, 2023
    Author: Harvardhan Patil on October 27, 2023
-  */
+ */
 
 type Fn = (row: Row<ICourse>) => void;
 
@@ -16,47 +16,53 @@ export const courseColumns = (
   handleEdit: Fn,
   handleDelete: Fn,
   handleTA: Fn,
-  handleCopy: Fn,
-  
+  handleCopy: Fn
 ) => [
   columnHelper.accessor("name", {
     id: "name",
-    header: () => <span style={{ fontWeight: 'bold', color: '#000000', fontSize: '1.17em' }}>Course Name</span>,
+    header: () => (
+      <span className="text-center fw-bold" style={{ color: "#000000", fontSize: "1.17em" }}>
+        Course Name
+      </span>
+    ),
     cell: (info) => (
-      <div className="d-flex justify-content-start align-items-center" style={{ fontSize: '1.1em', padding: '8px 0' }}>
-        <span style={{ color: '#000000' }}>{info.getValue()}</span>
+      <div className="text-center py-2">
+        <span style={{ color: "#000000" }}>{info.getValue()}</span>
       </div>
     ),
     enableSorting: true,
     enableColumnFilter: true,
     enableGlobalFilter: false,
   }),
-  
 
   columnHelper.accessor("institution.name", {
     id: "institution",
-    header: () => <span style={{ fontWeight: 'bold', color: '#000000', fontSize: '1.17em' }}>Institution</span>,
-    enableSorting: true,
-    enableMultiSort: true,
-    enableGlobalFilter: false,
+    header: () => (
+      <span className="text-center fw-bold" style={{ color: "#000000", fontSize: "1.17em" }}>
+        Institution
+      </span>
+    ),
     cell: (info) => (
-      <div className="d-flex justify-content-start align-items-center" style={{ fontSize: '1.17em', padding: '8px 0' }}>
+      <div className="text-center py-2">
         <span>{info.getValue() || <Badge bg="secondary">Not Available</Badge>}</span>
       </div>
     ),
+    enableSorting: true,
+    enableMultiSort: true,
+    enableGlobalFilter: false,
   }),
 
   columnHelper.accessor("instructor.name", {
     id: "instructor",
-    header: () => <span style={{ fontWeight: 'bold', color: '#000000', fontSize: '1.17em' }}>Instructor</span>,
-    enableSorting: true,
-    enableColumnFilter: true,
-    enableGlobalFilter: false,
+    header: () => (
+      <span className="text-center fw-bold" style={{ color: "#000000", fontSize: "1.17em" }}>
+        Instructor
+      </span>
+    ),
     cell: ({ row }) => {
       const instructor = row.original.instructor;
       return (
-        <div className="d-flex justify-content-start align-items-center" style={{ fontSize: '1.17em', 
-        padding: '8px 0' }}>
+        <div className="text-center py-2">
           <span>
             {instructor && instructor.name ? (
               instructor.name
@@ -67,45 +73,64 @@ export const courseColumns = (
         </div>
       );
     },
+    enableSorting: true,
+    enableColumnFilter: true,
+    enableGlobalFilter: false,
   }),
 
   columnHelper.accessor("created_at", {
-    header: () => <span style={{ fontWeight: 'bold', color: '#000000', fontSize: '1.17em' }}>Creation Date</span>,
-    enableSorting: true,
-    enableColumnFilter: true,
-    enableGlobalFilter: true,
+    header: () => (
+      <span className="text-center fw-bold" style={{ color: "#000000", fontSize: "1.17em" }}>
+        Creation Date
+      </span>
+    ),
     cell: (info) => (
-      <div className="d-flex justify-content-start align-items-center" style={{ fontSize: '1.17em', padding: '8px 0' }}>
+      <div className="text-center py-2">
         <span>{new Date(info.getValue()).toLocaleDateString() || <Badge bg="secondary">N/A</Badge>}</span>
       </div>
     ),
+    enableSorting: true,
+    enableColumnFilter: true,
+    enableGlobalFilter: true,
   }),
 
   columnHelper.accessor("updated_at", {
-    header: () => <span style={{ fontWeight: 'bold', color: '#000000', fontSize: '1.17em' }}>Updated Date</span>,
-    enableSorting: true,
-    enableColumnFilter: true,
-    enableGlobalFilter: true,
+    header: () => (
+      <span className="text-center fw-bold" style={{ color: "#000000", fontSize: "1.17em" }}>
+        Updated Date
+      </span>
+    ),
     cell: (info) => (
-      <div className="d-flex justify-content-start align-items-center" style={{ fontSize: '1.17em', padding: '8px 0' }}>
+      <div className="text-center py-2">
         <span>{new Date(info.getValue()).toLocaleDateString() || <Badge bg="secondary">N/A</Badge>}</span>
       </div>
     ),
+    enableSorting: true,
+    enableColumnFilter: true,
+    enableGlobalFilter: true,
   }),
 
   columnHelper.display({
     id: "actions",
-    header: () => <span style={{ fontWeight: 'bold', color: '#000000', fontSize: '1.17em' }}>Actions</span>,
+    header: () => (
+      <span className="text-center fw-bold" style={{ color: "#000000", fontSize: "1.17em" }}>
+        Actions
+      </span>
+    ),
     cell: ({ row }) => (
-      <div className="d-flex justify-content-around" style={{ fontSize: '1.17em', padding: '8px 0' }}>
+      <div className="d-flex justify-content-center gap-2 py-2">
         <OverlayTrigger overlay={<Tooltip>Edit Course</Tooltip>}>
           <Button
             variant="link"
             onClick={() => handleEdit(row)}
             aria-label="Edit Course"
-            style={{ padding: '0', margin: '0 8px' }} // Add margin for spacing
+            className="p-0"
           >
-            <img src={process.env.PUBLIC_URL + '/assets/images/pencil.png'} alt="Edit" style={{ width: '25px', height: '20px' }} />
+            <img
+              src={process.env.PUBLIC_URL + "/assets/images/edit-icon-24.png"}
+              alt="Edit"
+              style={{ width: "25px", height: "20px" }}
+            />
           </Button>
         </OverlayTrigger>
 
@@ -114,9 +139,13 @@ export const courseColumns = (
             variant="link"
             onClick={() => handleDelete(row)}
             aria-label="Delete Course"
-            style={{ padding: '0', margin: '0 8px' }}
+            className="p-0"
           >
-            <img src={process.env.PUBLIC_URL + '/assets/images/remove.png'} alt="Delete" style={{ width: '25px', height: '20px' }} />
+            <img
+              src={process.env.PUBLIC_URL + "/assets/images/delete-icon-24.png"}
+              alt="Delete"
+              style={{ width: "25px", height: "20px" }}
+            />
           </Button>
         </OverlayTrigger>
 
@@ -125,9 +154,13 @@ export const courseColumns = (
             variant="link"
             onClick={() => handleTA(row)}
             aria-label="Assign TA"
-            style={{ padding: '0', margin: '0 8px' }}
+            className="p-0"
           >
-            <img src={process.env.PUBLIC_URL + '/assets/images/assign.png'} alt="Assign TA" style={{ width: '35px', height: '25px' }} />
+            <img
+              src={process.env.PUBLIC_URL + "/assets/images/add-ta-24.png"}
+              alt="Assign TA"
+              style={{ width: "35px", height: "25px" }}
+            />
           </Button>
         </OverlayTrigger>
 
@@ -136,9 +169,13 @@ export const courseColumns = (
             variant="link"
             onClick={() => handleCopy(row)}
             aria-label="Copy Course"
-            style={{ padding: '0', margin: '0 8px' }}
+            className="p-0"
           >
-            <img src={'/assets/images/paste.png'} alt="Copy" style={{ width: '35px', height: '25px' }} />
+            <img
+              src={"/assets/images/Copy-icon-24.png"}
+              alt="Copy"
+              style={{ width: "35px", height: "25px" }}
+            />
           </Button>
         </OverlayTrigger>
       </div>
