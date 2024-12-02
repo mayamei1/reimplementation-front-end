@@ -16,7 +16,7 @@ export const courseColumns = (
   handleEdit: Fn,
   handleDelete: Fn,
   handleTA: Fn,
-  handleCopy: Fn
+  handleCopy: Fn,
 ) => [
   columnHelper.accessor("name", {
     id: "name",
@@ -35,8 +35,8 @@ export const courseColumns = (
     enableGlobalFilter: false,
   }),
 
-  columnHelper.accessor("institution.name", {
-    id: "institution",
+  /*columnHelper.accessor("institution.name", {
+   id: "institution",
     header: () => (
       <span className="text-center fw-bold" style={{ color: "#000000", fontSize: "1.17em" }}>
         Institution
@@ -50,7 +50,7 @@ export const courseColumns = (
     enableSorting: true,
     enableMultiSort: true,
     enableGlobalFilter: false,
-  }),
+  }),*/
 
   columnHelper.accessor("instructor.name", {
     id: "instructor",
@@ -148,21 +148,13 @@ export const courseColumns = (
             />
           </Button>
         </OverlayTrigger>
-
-        <OverlayTrigger overlay={<Tooltip>Assign TA</Tooltip>}>
-          <Button
-            variant="link"
-            onClick={() => handleTA(row)}
-            aria-label="Assign TA"
-            className="p-0"
-          >
-            <img
-              src={process.env.PUBLIC_URL + "/assets/images/add-ta-24.png"}
-              alt="Assign TA"
-              style={{ width: "35px", height: "25px" }}
-            />
-          </Button>
-        </OverlayTrigger>
+ 
+          <OverlayTrigger overlay={<Tooltip>Assign TA</Tooltip>}>
+            <Button variant="link" onClick={() => handleTA(row)} aria-label="Assign TA" className="p-0">
+              <img src={process.env.PUBLIC_URL + "/assets/images/add-ta-24.png"} alt="Assign TA" style={{ width: "25px", height: "20px" }} />
+            </Button>
+          </OverlayTrigger>
+        
 
         <OverlayTrigger overlay={<Tooltip>Copy Course</Tooltip>}>
           <Button

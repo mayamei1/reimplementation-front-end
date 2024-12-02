@@ -107,8 +107,9 @@ export async function loadCourseInstructorDataAndInstitutions({ params }: any) {
     transformResponse: transformInstructorResponse,
   });
   const users = await usersResponse.data;
-  
-  const instructors = users.filter((user: IUserRequest) => !hasAllPrivilegesOf(getPrivilegeFromID(user.role_id), ROLE.TA));
+  console.log(users.role_id)
+  console.log(courseData)
+  const instructors = users.filter((user: IUserRequest) => !hasAllPrivilegesOf(getPrivilegeFromID(user.role_id), ROLE.INSTRUCTOR));
 
   return { courseData, institutions, instructors }
 }

@@ -205,7 +205,7 @@ const Courses = () => {
             />
           )}
 
-          <Row>
+          <Row >
             <Table
               showGlobalFilter={false}
               data={visibleCourses}
