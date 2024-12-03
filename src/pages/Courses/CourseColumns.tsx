@@ -2,19 +2,20 @@ import { createColumnHelper, Row } from "@tanstack/react-table";
 import { Button } from "react-bootstrap";
 import { BsPencilFill, BsPersonXFill } from "react-icons/bs";
 import { MdContentCopy, MdDelete } from "react-icons/md";
-import { ICourseResponse as ICourse } from "../../utils/interfaces";
+import { ICourseResponse as ICourse, ROLE } from "../../utils/interfaces";
 import ColumnButton from "../../components/ColumnButton";
 
 
 /**
- * @author Atharva Thorve, on December, 2023
- * @author Mrityunjay Joshi on December, 2023
+ * @author Anurag Gorkar, on December, 2024
+ * @author Makarand Pundalik, on December, 2024
+ * @author Rutvik Kulkarni, on December, 2024
  */
 
 // Course Columns Configuration: Defines the columns for the courses table
 type Fn = (row: Row<ICourse>) => void;
 const columnHelper = createColumnHelper<ICourse>();
-export const courseColumns = (handleEdit: Fn, handleDelete: Fn, handleTA: Fn, handleCopy: Fn) => [
+export const courseColumns = (handleEdit: Fn, handleDelete: Fn, handleTA: Fn, handleCopy: Fn, currUserRole: String) => [
   // Column for the course name
   columnHelper.accessor("name", {
     id: "name",
@@ -72,6 +73,7 @@ export const courseColumns = (handleEdit: Fn, handleDelete: Fn, handleTA: Fn, ha
           tooltip="Delete this course"
           icon={<MdDelete />}
         />
+        {currUserRole === ROLE.SUPER_ADMIN.valueOf() && (// Only show this button if the user is an admin (role_id = 1)
         <ColumnButton
           id="assign-ta"
           variant="outline-info"
@@ -80,7 +82,7 @@ export const courseColumns = (handleEdit: Fn, handleDelete: Fn, handleTA: Fn, ha
           onClick={() => handleTA(row)}
           tooltip="Assign a TA to this course"
           icon={<BsPersonXFill />}
-        />
+        />)}
         <ColumnButton
           id="copy"
           variant="outline-primary"
