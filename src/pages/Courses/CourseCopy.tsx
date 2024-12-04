@@ -6,11 +6,6 @@ import { HttpMethod } from "utils/httpMethods";
 import useAPI from "../../hooks/useAPI";
 import { ICourseResponse as ICourse } from "../../utils/interfaces";
 
-/**
- * @author Suraj Raghu Kumar, on Oct, 2024 
- * @author Yuktasree Muppala on Oct, 2024
- * @author Harvardhan Patil on Oct, 2024
- */
 
 // CopyCourse Component: Modal for copying a course.
 

@@ -6,11 +6,6 @@ import { HttpMethod } from "utils/httpMethods";
 import useAPI from "../../hooks/useAPI";
 import { ICourseResponse as ICourse } from "../../utils/interfaces";
 
-/**
- *  @author Suraj Raghu Kumar, on Oct, 2024 
- * @author Yuktasree Muppala on Oct, 2024
- * @author Harvardhan Patil on Oct, 2024
- */
 
 // DeleteCourse Component: Modal for deleting a course
 
@@ -20,7 +15,7 @@ interface IDeleteCourse {
 }
 
 const DeleteCourse: React.FC<IDeleteCourse> = ({ courseData, onClose }) => {
-  // State and hook declarations
+  
   const { data: deletedCourse, error: courseError, sendRequest: DeleteCourse } = useAPI();
   const [show, setShow] = useState<boolean>(true);
   const dispatch = useDispatch();
