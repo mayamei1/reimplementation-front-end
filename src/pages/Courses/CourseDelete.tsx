@@ -34,7 +34,7 @@ const DeleteCourse: React.FC<IDeleteCourse> = ({ courseData, onClose }) => {
     if (courseError) dispatch(alertActions.showAlert({ variant: "danger", message: courseError }));
   }, [courseError, dispatch]);
  
-  //Added this method to be called for success and achieve LSP and DRY
+  //Added this method to be called in below and achieve LSP
   const handleDeleteSuccess = () => {
     setShow(false);
     dispatch(
@@ -60,7 +60,7 @@ const DeleteCourse: React.FC<IDeleteCourse> = ({ courseData, onClose }) => {
 
   // Render the DeleteCourse modal
   return (
-    <Modal show={show} onHide={closeHandler}>
+    <Modal show={show} onHide={closeHandler}centered>
       <Modal.Header closeButton>
         <Modal.Title>Delete Course</Modal.Title>
       </Modal.Header>

@@ -63,31 +63,31 @@ const CopyCourse: React.FC<ICopyCourse> = ({ courseData, onClose }) => {
 
   // Render the CopyCourse modal
   return (
-    <Modal show={show} onHide={closeHandler} centered>
-      <Modal.Header closeButton className="bg-primary text-white">
+    <Modal show={show} onHide={closeHandler}centered>
+      <Modal.Header closeButton>
         <Modal.Title>Copy Course</Modal.Title>
       </Modal.Header>
-      <Modal.Body className="text-center">
+      <Modal.Body>
         <p>
-          Are you sure you want to copy course <b>{courseData.name}?</b>
+          Are you sure you want to copy the course <b>{courseData.name}?</b>
         </p>
+        <div className="d-flex flex-column align-items-center justify-content-center">
         {isCopying && <Spinner animation="border" variant="primary" />}
         {courseError && <Alert variant="danger">{courseError}</Alert>} {/* Display error message */}
+        </div>
       </Modal.Body>
-      <Modal.Footer className="d-flex justify-content-center">
+
+      <Modal.Footer>
         <Button variant="outline-secondary" onClick={closeHandler}>
           Cancel
         </Button>
-        <Button 
-          variant="primary" 
-          onClick={copyHandler} 
-          disabled={isCopying} // Disable button while copying
-        >
+        <Button variant="outline-danger" onClick={copyHandler}disabled={isCopying}>
           {isCopying ? "Copying..." : "Copy"}
         </Button>
       </Modal.Footer>
     </Modal>
   );
 };
+
 
 export default CopyCourse;

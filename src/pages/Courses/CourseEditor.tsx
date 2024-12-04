@@ -56,7 +56,7 @@ const CourseEditor: React.FC<IEditor> = ({ mode }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-
+  console.log(courseData)
   interface IFormOption {
     label: string;
     value: string;
@@ -70,16 +70,14 @@ const CourseEditor: React.FC<IEditor> = ({ mode }) => {
     if (auth.user.role === ROLE.INSTRUCTOR.valueOf()) {
       setSelectedInstitutionId(auth.user.institution_id);
       setFilteredInstructors([
-        { label: auth.user.full_name, value: String(auth.user.id) },
+        { label: auth.user.name, value: String(auth.user.id) },
       ]);
     } else {
       fetchusers({ url: "/users" });
     }
   }, [auth.user, fetchusers]);
-  /*useEffect(() => {
-    fetchusers({url:'/users'});
-  }, [fetchusers]);*/
-
+  
+  
   // Filter instructors based on selected institution
   useEffect(() => {
 
@@ -89,14 +87,16 @@ const CourseEditor: React.FC<IEditor> = ({ mode }) => {
       // Filter by instructors by institution
       const onlyInstructors = users.data.filter((user: any) => 
         (user.role.name === 'Instructor')&& (user.institution.id === selectedInstitutionId)); 
-      console.log('Users:', users.data)
+      //console.log('Users:', users.data)
       onlyInstructors.forEach((instructor: any) => {
         instructorsList.push({ label: instructor.name, value: String(instructor.id) });
       });
+      
       setFilteredInstructors(instructorsList);
 
     }
   }, [users, selectedInstitutionId]); // Re-run this effect when users or selectedInstitutionId changes
+  
 
   // Handle institution selection change
 const handleInstitutionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -155,6 +155,7 @@ useEffect(() => {
   };
 
   // Function to close the modal
+  console.log(filteredInstructors)
   const handleClose = () => navigate(location.state?.from ? location.state.from : "/courses");
   // Render the CourseEditor modal
   return (
@@ -209,14 +210,24 @@ useEffect(() => {
                   onChange={handleInstitutionChange} // Add onChange to handle institution selection
                 />
                 <FormSelect
-                  controlId="course-instructor"
-                  name="instructor_id"
-                  disabled={mode === "update" || auth.user.role !== ROLE.SUPER_ADMIN.valueOf()}
-                  options={filteredInstructors}
-                  inputGroupPrepend={
-                    <InputGroup.Text id="course-inst-prep">Instructors</InputGroup.Text>
-                  }
-                />
+  controlId="course-instructor"
+  name="instructor_id"
+  disabled={mode === "update" || auth.user.role !== ROLE.SUPER_ADMIN.valueOf()}
+  options={
+    mode === "update" && courseData?.instructor_id && auth.user.role == ROLE.SUPER_ADMIN.valueOf()
+      ? [
+          { 
+            label: users?.data.find((user: any) => String(user.id) === String(courseData.instructor_id))?.name, 
+            value: String(courseData.instructor_id) 
+          },
+          ...filteredInstructors
+        ]
+      : filteredInstructors
+  }
+  inputGroupPrepend={
+    <InputGroup.Text id="course-inst-prep">Instructors</InputGroup.Text>
+  }
+/>
                 <FormInput
                   controlId="name"
                   label="Name"

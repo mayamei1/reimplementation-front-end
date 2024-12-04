@@ -16,53 +16,42 @@ export const courseColumns = (
   handleEdit: Fn,
   handleDelete: Fn,
   handleTA: Fn,
-  handleCopy: Fn,
+  handleCopy: Fn
 ) => [
   columnHelper.accessor("name", {
     id: "name",
     header: () => (
-      <span className="text-center fw-bold" style={{ color: "#000000", fontSize: "1.17em" }}>
+      <span
+        className="text-start fw-bold"
+        style={{ color: "#000000", fontSize: "1.17em" }}
+      >
         Course Name
       </span>
     ),
     cell: (info) => (
-      <div className="text-center py-2">
+      <div className="text-start py-2">
         <span style={{ color: "#000000" }}>{info.getValue()}</span>
       </div>
     ),
     enableSorting: true,
     enableColumnFilter: true,
-    enableGlobalFilter: false,
+    enableGlobalFilter: true,
   }),
-
-  /*columnHelper.accessor("institution.name", {
-   id: "institution",
-    header: () => (
-      <span className="text-center fw-bold" style={{ color: "#000000", fontSize: "1.17em" }}>
-        Institution
-      </span>
-    ),
-    cell: (info) => (
-      <div className="text-center py-2">
-        <span>{info.getValue() || <Badge bg="secondary">Not Available</Badge>}</span>
-      </div>
-    ),
-    enableSorting: true,
-    enableMultiSort: true,
-    enableGlobalFilter: false,
-  }),*/
 
   columnHelper.accessor("instructor.name", {
     id: "instructor",
     header: () => (
-      <span className="text-center fw-bold" style={{ color: "#000000", fontSize: "1.17em" }}>
+      <span
+        className="text-start fw-bold"
+        style={{ color: "#000000", fontSize: "1.17em" }}
+      >
         Instructor
       </span>
     ),
     cell: ({ row }) => {
       const instructor = row.original.instructor;
       return (
-        <div className="text-center py-2">
+        <div className="text-start py-2">
           <span>
             {instructor && instructor.name ? (
               instructor.name
@@ -75,18 +64,25 @@ export const courseColumns = (
     },
     enableSorting: true,
     enableColumnFilter: true,
-    enableGlobalFilter: false,
+    enableGlobalFilter: true,
   }),
 
   columnHelper.accessor("created_at", {
     header: () => (
-      <span className="text-center fw-bold" style={{ color: "#000000", fontSize: "1.17em" }}>
+      <span
+        className="text-start fw-bold"
+        style={{ color: "#000000", fontSize: "1.17em" }}
+      >
         Creation Date
       </span>
     ),
     cell: (info) => (
-      <div className="text-center py-2">
-        <span>{new Date(info.getValue()).toLocaleDateString() || <Badge bg="secondary">N/A</Badge>}</span>
+      <div className="text-start py-2">
+        <span>
+          {new Date(info.getValue()).toLocaleDateString() || (
+            <Badge bg="secondary">N/A</Badge>
+          )}
+        </span>
       </div>
     ),
     enableSorting: true,
@@ -96,29 +92,39 @@ export const courseColumns = (
 
   columnHelper.accessor("updated_at", {
     header: () => (
-      <span className="text-center fw-bold" style={{ color: "#000000", fontSize: "1.17em" }}>
+      <span
+        className="text-start fw-bold"
+        style={{ color: "#000000", fontSize: "1.17em" }}
+      >
         Updated Date
       </span>
     ),
     cell: (info) => (
-      <div className="text-center py-2">
-        <span>{new Date(info.getValue()).toLocaleDateString() || <Badge bg="secondary">N/A</Badge>}</span>
+      <div className="text-start py-2">
+        <span>
+          {new Date(info.getValue()).toLocaleDateString() || (
+            <Badge bg="secondary">N/A</Badge>
+          )}
+        </span>
       </div>
     ),
     enableSorting: true,
     enableColumnFilter: true,
-    enableGlobalFilter: true,
+    enableGlobalFilter: false,
   }),
 
   columnHelper.display({
     id: "actions",
     header: () => (
-      <span className="text-center fw-bold" style={{ color: "#000000", fontSize: "1.17em" }}>
+      <span
+        className="text-start fw-bold"
+        style={{ color: "#000000", fontSize: "1.17em" }}
+      >
         Actions
       </span>
     ),
     cell: ({ row }) => (
-      <div className="d-flex justify-content-center gap-2 py-2">
+      <div className="d-flex justify-content-start gap-2 py-2">
         <OverlayTrigger overlay={<Tooltip>Edit Course</Tooltip>}>
           <Button
             variant="link"
@@ -148,13 +154,21 @@ export const courseColumns = (
             />
           </Button>
         </OverlayTrigger>
- 
-          <OverlayTrigger overlay={<Tooltip>Assign TA</Tooltip>}>
-            <Button variant="link" onClick={() => handleTA(row)} aria-label="Assign TA" className="p-0">
-              <img src={process.env.PUBLIC_URL + "/assets/images/add-ta-24.png"} alt="Assign TA" style={{ width: "25px", height: "20px" }} />
-            </Button>
-          </OverlayTrigger>
-        
+
+        <OverlayTrigger overlay={<Tooltip>Assign TA</Tooltip>}>
+          <Button
+            variant="link"
+            onClick={() => handleTA(row)}
+            aria-label="Assign TA"
+            className="p-0"
+          >
+            <img
+              src={process.env.PUBLIC_URL + "/assets/images/add-ta-24.png"}
+              alt="Assign TA"
+              style={{ width: "25px", height: "20px" }}
+            />
+          </Button>
+        </OverlayTrigger>
 
         <OverlayTrigger overlay={<Tooltip>Copy Course</Tooltip>}>
           <Button
