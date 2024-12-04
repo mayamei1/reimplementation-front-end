@@ -2,11 +2,6 @@ import { createColumnHelper, Row } from "@tanstack/react-table";
 import { Button, Tooltip, OverlayTrigger, Badge } from "react-bootstrap";
 import { ICourseResponse as ICourse } from "../../utils/interfaces";
 
-/**
- * Author: Suraj Raghu Kumar on October 27, 2023
-   Author: Yuktasree Muppala on October 27, 2023
-   Author: Harvardhan Patil on October 27, 2023
- */
 
 type Fn = (row: Row<ICourse>) => void;
 
