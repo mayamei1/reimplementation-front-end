@@ -65,10 +65,10 @@ const DeleteCourse: React.FC<IDeleteCourse> = ({ courseData, onClose }) => {
         </p>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="outline-secondary" onClick={closeHandler}>
+        <Button variant="danger" className="btn btn-md" onClick={closeHandler}>
           Cancel
         </Button>
-        <Button variant="outline-danger" onClick={deleteHandler}>
+        <Button variant="success" className="btn btn-md" onClick={deleteHandler}>
           Delete
         </Button>
       </Modal.Footer>
