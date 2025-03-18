@@ -7,7 +7,7 @@ const SubmissionList = ({ submissions, onGradeClick }: { submissions: any[], onG
   const columns = useMemo(() => SubmissionEntry({ onGradeClick }), [onGradeClick]);
 
   return (
-    <div className="table-container" style={{ width: "100%", overflowX: "auto", fontSize: 15, lineHeight: 1.28 }}>
+    <div className="table-container" style={{ width: "100%", overflowX: "auto", fontSize: 15, lineHeight: 1.428 }}>
       <Table
         data={submissions}
         columns={columns}
