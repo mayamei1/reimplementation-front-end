@@ -88,7 +88,7 @@ const SubmissionView = () => {
     <Container className="mt-4" style={{display: 'flex', flexDirection: 'column'}}>
       <Row>
         <Col>
-          <h1>Submissions</h1>
+          <h2>Submissions</h2>
           <hr />
         </Col>
       </Row>
