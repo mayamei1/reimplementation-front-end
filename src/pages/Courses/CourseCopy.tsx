@@ -73,10 +73,10 @@ const CopyCourse: React.FC<ICopyCourse> = ({ courseData, onClose }) => {
       </Modal.Body>
 
       <Modal.Footer>
-        <Button variant="outline-secondary" onClick={closeHandler}>
+        <Button variant="danger" className="btn btn-md" onClick={closeHandler}>
           Cancel
         </Button>
-        <Button variant="outline-danger" onClick={copyHandler}disabled={isCopying}>
+        <Button variant="success" className="btn btn-md" onClick={copyHandler}disabled={isCopying}>
           {isCopying ? "Copying..." : "Copy"}
         </Button>
       </Modal.Footer>
