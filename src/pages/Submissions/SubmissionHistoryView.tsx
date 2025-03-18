@@ -96,7 +96,7 @@ const SubmissionHistoryView = () => {
   });
 
   return (
-    <div className="mt-4">
+    <div className="mt-4" style={{ fontSize: 15, lineHeight: 1.428 }}>
       <Table
         data={history}
         columns={columns}
