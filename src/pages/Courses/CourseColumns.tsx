@@ -1,6 +1,7 @@
 import { createColumnHelper, Row } from "@tanstack/react-table";
 import { Button, Tooltip, OverlayTrigger, Badge } from "react-bootstrap";
 import { ICourseResponse as ICourse } from "../../utils/interfaces";
+import { formatDate } from "./CourseUtil";
 
 
 type Fn = (row: Row<ICourse>) => void;
@@ -74,7 +75,7 @@ export const courseColumns = (
     cell: (info) => (
       <div className="text-start py-2">
         <span>
-          {new Date(info.getValue()).toLocaleDateString() || (
+          {formatDate(new Date(info.getValue()).toLocaleDateString()) || (
             <Badge bg="secondary">N/A</Badge>
           )}
         </span>
@@ -97,7 +98,7 @@ export const courseColumns = (
     cell: (info) => (
       <div className="text-start py-2">
         <span>
-          {new Date(info.getValue()).toLocaleDateString() || (
+          {formatDate(new Date(info.getValue()).toLocaleDateString()) || (
             <Badge bg="secondary">N/A</Badge>
           )}
         </span>
