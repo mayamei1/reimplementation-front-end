@@ -6,7 +6,7 @@ import {
 } from '@tanstack/react-table';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Table from '../../components/Table/Table'; // Make sure this is correctly imported
+import Table from '../../components/Table/Table';
 
 interface HistoryEntry {
   teamId: number;
