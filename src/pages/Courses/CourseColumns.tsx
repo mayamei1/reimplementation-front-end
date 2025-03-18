@@ -123,10 +123,10 @@ export const courseColumns = (
       <div className="d-flex justify-content-start gap-2 py-2">
         <OverlayTrigger overlay={<Tooltip>Edit Course</Tooltip>}>
           <Button
-            variant="link"
+            variant="outline-secondary"
             onClick={() => handleEdit(row)}
             aria-label="Edit Course"
-            className="p-0"
+            className="btn btn-md"
           >
             <img
               src={process.env.PUBLIC_URL + "/assets/images/edit-icon-24.png"}
@@ -138,10 +138,10 @@ export const courseColumns = (
 
         <OverlayTrigger overlay={<Tooltip>Delete Course</Tooltip>}>
           <Button
-            variant="link"
+            variant="outline-secondary"
             onClick={() => handleDelete(row)}
             aria-label="Delete Course"
-            className="p-0"
+            className="btn btn-md"
           >
             <img
               src={process.env.PUBLIC_URL + "/assets/images/delete-icon-24.png"}
@@ -153,10 +153,10 @@ export const courseColumns = (
 
         <OverlayTrigger overlay={<Tooltip>Assign TA</Tooltip>}>
           <Button
-            variant="link"
+            variant="outline-secondary"
             onClick={() => handleTA(row)}
             aria-label="Assign TA"
-            className="p-0"
+            className="btn btn-md"
           >
             <img
               src={process.env.PUBLIC_URL + "/assets/images/add-ta-24.png"}
@@ -168,10 +168,10 @@ export const courseColumns = (
 
         <OverlayTrigger overlay={<Tooltip>Copy Course</Tooltip>}>
           <Button
-            variant="link"
+            variant="outline-secondary"
             onClick={() => handleCopy(row)}
             aria-label="Copy Course"
-            className="p-0"
+            className="btn btn-md"
           >
             <img
               src={"/assets/images/Copy-icon-24.png"}
