@@ -164,6 +164,8 @@ const Courses = () => {
     );
   }, [mergedTableData, loggedInUserRole]);
 
+  const showPagination = useMemo(() => visibleCourses.length > 10, [visibleCourses]);
+
   return (
     <>
       <Outlet />
@@ -215,6 +217,7 @@ const Courses = () => {
                 institution: auth.user.role === ROLE.SUPER_ADMIN.valueOf(),
                 instructor: auth.user.role === ROLE.SUPER_ADMIN.valueOf(),
               }}
+              showPagination={showPagination}
             />
           </Row>
         </Container>
