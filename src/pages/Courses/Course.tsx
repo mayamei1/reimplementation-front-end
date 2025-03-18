@@ -186,7 +186,7 @@ const Courses = () => {
           <Row>
 
           <Col md={{ span: 1, offset: 11 }} style={{ paddingBottom: "10px" }}>
-              <Button variant="outline-success" onClick={() => navigate("new")}>
+              <Button className="btn pull-right new-button btn-md" variant="primary" onClick={() => navigate("new")}>
                 <RiHealthBookLine />
               </Button>
             </Col>
