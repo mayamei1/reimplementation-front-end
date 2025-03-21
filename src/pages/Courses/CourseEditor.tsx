@@ -82,7 +82,7 @@ const CourseEditor: React.FC<IEditor> = ({ mode }) => {
   useEffect(() => {
 
     if (users) {
-      const instructorsList: IFormOption[] = [{ label: 'Select an Instructor', value: '' }];
+      const instructorsList: IFormOption[] = [{ label: 'Select an instructor', value: '' }];
       
       // Filter by instructors by institution
       const onlyInstructors = users.data.filter((user: any) => 
@@ -236,13 +236,13 @@ useEffect(() => {
                 />
                 <FormInput
                   controlId="directory"
-                  label="Course Directory (Mandatory field. No Spaces, Special Characters, or quotes)"
+                  label="Course directory (*mandatory field: no spaces, special characters, or quotes)"
                   name="directory"
                 />
-                <FormInput controlId="info" label="Course Information" name="info" />
+                <FormInput controlId="info" label="Course information" name="info" />
                 <FormCheckBoxGroup
                   controlId="course-visibility"
-                  label="Course Visibility"
+                  label="Course visibility"
                   name="private"
                   options={courseVisibility}
                 />
@@ -257,7 +257,7 @@ useEffect(() => {
                     type="submit"
                     disabled={!(formik.isValid && formik.dirty) || formik.isSubmitting}
                   >
-                    {mode === "update" ? "Update Course" : "Create Course"}
+                    {mode === "update" ? "Update course" : "Create course"}
                   </Button>
                 </Modal.Footer>
               </Form>
