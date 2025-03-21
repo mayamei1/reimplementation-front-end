@@ -26,7 +26,7 @@ const SubmissionHistoryView = () => {
 
   const columns = [
     columnHelper.accessor('teamId', {
-      header: 'Team Id',
+      header: 'Team id',
       cell: (info) => info.getValue(),
     }),
     columnHelper.accessor('operation', {

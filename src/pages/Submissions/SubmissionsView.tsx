@@ -27,8 +27,8 @@ const SubmissionView = () => {
         }));
       
         const links = [
-          { url: `https://github.com/example/repo${id}`, displayName: "GitHub Repository" },
-          { url: `http://example.com/submission${id}`, displayName: "Submission Link" },
+          { url: `https://github.com/example/repo${id}`, displayName: "GitHub repository" },
+          { url: `http://example.com/submission${id}`, displayName: "Submission link" },
         ];
       
         const fileInfo = [
@@ -95,9 +95,9 @@ const SubmissionView = () => {
       <Row>
         <Col md={3}>
           <Form.Group controlId="assignmentFilter">
-            <Form.Label>Filter by Assignment</Form.Label>
+            <Form.Label>Filter by assignment</Form.Label>
             <Form.Control as="select" value={assignmentFilter} onChange={(e) => handleAssignmentChange(e as any)}>
-              <option value="">All Assignments</option>
+              <option value="">All assignments</option>
               {assignments.map((assignment, index) => (
                 <option key={index} value={assignment}>{assignment}</option>
               ))}
