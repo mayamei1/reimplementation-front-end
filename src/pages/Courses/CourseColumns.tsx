@@ -15,110 +15,61 @@ export const courseColumns = (
   handleCopy: Fn
 ) => [
   columnHelper.accessor("name", {
-    id: "name",
-    header: () => (
-      <span
-        className="text-start fw-bold"
-        style={{ color: "#000000", fontSize: "1.17em" }}
-      >
-        Course Name
-      </span>
-    ),
+    header: () => "Course name",
     cell: (info) => (
-      <div className="text-start py-2">
-        <span style={{ color: "#000000" }}>{info.getValue()}</span>
+      <div className="py-2">
+        {info.getValue()}
       </div>
     ),
     enableSorting: true,
-    enableColumnFilter: true,
-    enableGlobalFilter: true,
   }),
 
   columnHelper.accessor("instructor.name", {
-    id: "instructor",
-    header: () => (
-      <span
-        className="text-start fw-bold"
-        style={{ color: "#000000", fontSize: "1.17em" }}
-      >
-        Instructor
-      </span>
-    ),
+    header: () => "Instructor",
     cell: ({ row }) => {
       const instructor = row.original.instructor;
       return (
-        <div className="text-start py-2">
-          <span>
-            {instructor && instructor.name ? (
-              instructor.name
-            ) : (
-              <Badge bg="danger">Unassigned</Badge>
-            )}
-          </span>
+        <div className="py-2">
+          {instructor && instructor.name ? (
+            instructor.name
+          ) : (
+            <Badge bg="danger">Unassigned</Badge>
+          )}
         </div>
       );
     },
     enableSorting: true,
-    enableColumnFilter: true,
-    enableGlobalFilter: true,
   }),
 
   columnHelper.accessor("created_at", {
-    header: () => (
-      <span
-        className="text-start fw-bold"
-        style={{ color: "#000000", fontSize: "1.17em" }}
-      >
-        Creation Date
-      </span>
-    ),
+    header: () => "Creation date",
     cell: (info) => (
-      <div className="text-start py-2">
-        <span>
-          {formatDate(new Date(info.getValue()).toLocaleDateString()) || (
+      <div className="py-2">
+          {
+            formatDate(new Date(info.getValue()).toLocaleDateString()) ||
             <Badge bg="secondary">N/A</Badge>
-          )}
-        </span>
+          }
       </div>
     ),
     enableSorting: true,
-    enableColumnFilter: true,
-    enableGlobalFilter: true,
   }),
 
   columnHelper.accessor("updated_at", {
-    header: () => (
-      <span
-        className="text-start fw-bold"
-        style={{ color: "#000000", fontSize: "1.17em" }}
-      >
-        Updated Date
-      </span>
-    ),
+    header: () => "Updated date",
     cell: (info) => (
-      <div className="text-start py-2">
-        <span>
-          {formatDate(new Date(info.getValue()).toLocaleDateString()) || (
-            <Badge bg="secondary">N/A</Badge>
-          )}
-        </span>
+      <div className="py-2">
+        {
+          formatDate(new Date(info.getValue()).toLocaleDateString()) ||
+          <Badge bg="secondary">N/A</Badge>
+        }
       </div>
     ),
     enableSorting: true,
-    enableColumnFilter: true,
-    enableGlobalFilter: false,
   }),
 
   columnHelper.display({
     id: "actions",
-    header: () => (
-      <span
-        className="text-start fw-bold"
-        style={{ color: "#000000", fontSize: "1.17em" }}
-      >
-        Actions
-      </span>
-    ),
+    header: () => "Actions",
     cell: ({ row }) => (
       <div className="d-flex justify-content-start gap-2 py-2">
         <OverlayTrigger overlay={<Tooltip>Edit Course</Tooltip>}>
@@ -131,7 +82,8 @@ export const courseColumns = (
             <img
               src={process.env.PUBLIC_URL + "/assets/images/edit-icon-24.png"}
               alt="Edit"
-              style={{ width: "25px", height: "20px" }}
+              width="25px"
+              height="20px"
             />
           </Button>
         </OverlayTrigger>
@@ -146,7 +98,8 @@ export const courseColumns = (
             <img
               src={process.env.PUBLIC_URL + "/assets/images/delete-icon-24.png"}
               alt="Delete"
-              style={{ width: "25px", height: "20px" }}
+              width="25px"
+              height="20px"
             />
           </Button>
         </OverlayTrigger>
@@ -161,7 +114,8 @@ export const courseColumns = (
             <img
               src={process.env.PUBLIC_URL + "/assets/images/add-ta-24.png"}
               alt="Assign TA"
-              style={{ width: "25px", height: "20px" }}
+              width="25px"
+              height="20px"
             />
           </Button>
         </OverlayTrigger>
@@ -176,7 +130,8 @@ export const courseColumns = (
             <img
               src={"/assets/images/Copy-icon-24.png"}
               alt="Copy"
-              style={{ width: "35px", height: "25px" }}
+              width="25px"
+              height="20px"
             />
           </Button>
         </OverlayTrigger>
