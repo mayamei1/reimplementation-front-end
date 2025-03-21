@@ -164,8 +164,6 @@ const Courses = () => {
     );
   }, [mergedTableData, loggedInUserRole]);
 
-  const showPagination = useMemo(() => visibleCourses.length > 10, [visibleCourses]);
-
   return (
     <>
       <Outlet />
@@ -208,17 +206,20 @@ const Courses = () => {
           )}
 
           <Row >
-            <Table
-              showGlobalFilter={false}
-              data={visibleCourses}
-              columns={tableColumns}
-              columnVisibility={{
-                id: false,
-                institution: auth.user.role === ROLE.SUPER_ADMIN.valueOf(),
-                instructor: auth.user.role === ROLE.SUPER_ADMIN.valueOf(),
-              }}
-              showPagination={showPagination}
-            />
+            <div style={{ fontSize: "15px", lineHeight: "1.428em" }}>
+              <Table
+                showGlobalFilter={false}
+                showColumnFilter={false}
+                data={visibleCourses}
+                columns={tableColumns}
+                columnVisibility={{
+                  id: false,
+                  institution: auth.user.role === ROLE.SUPER_ADMIN.valueOf(),
+                  instructor: auth.user.role === ROLE.SUPER_ADMIN.valueOf(),
+                }}
+                showPagination={visibleCourses.length > 10}
+              />
+            </div>
           </Row>
         </Container>
       </main>
