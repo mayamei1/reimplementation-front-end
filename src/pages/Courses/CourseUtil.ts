@@ -20,7 +20,7 @@ type PermittedCourseVisibility = CourseVisibility.PRIVATE
 
 // Form options for course visibility
 export const courseVisibility: IFormOption[] = [
-  { label: "Private Course", value: CourseVisibility.PRIVATE },
+  { label: "Private course", value: CourseVisibility.PRIVATE },
 ];
 
 // Interface for course form values
