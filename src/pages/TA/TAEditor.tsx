@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Select from 'react-select';
 import { Form, Formik, FormikHelpers } from "formik";
 import useAPI from "hooks/useAPI";
-import { Button, InputGroup, Modal } from "react-bootstrap";
+import { Alert, Button, InputGroup, Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useLoaderData, useLocation, useNavigate, useParams } from "react-router-dom";
 import { alertActions } from "store/slices/alertSlice";
@@ -150,7 +150,11 @@ const TAEditor: React.FC<IEditor> = ({ mode }) => {
           <Modal.Title>Add TA</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {TAError && <p className="text-danger">{TAError}</p>}
+          { TAError && (
+            <Alert variant="flash_note alert alert-danger">
+              {TAError}
+            </Alert>
+          )}
           <Formik
             initialValues={initialValues}
             onSubmit={onSubmit}
