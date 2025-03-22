@@ -27,8 +27,8 @@ const SubmissionView = () => {
         }));
       
         const links = [
-          { url: `https://github.com/example/repo${id}`, displayName: "GitHub Repository" },
-          { url: `http://example.com/submission${id}`, displayName: "Submission Link" },
+          { url: `https://github.com/example/repo${id}`, displayName: "GitHub repository" },
+          { url: `http://example.com/submission${id}`, displayName: "Submission link" },
         ];
       
         const fileInfo = [
