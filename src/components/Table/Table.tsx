@@ -156,15 +156,12 @@ const Table: React.FC<TableProps> = ({
             )}
           </Col>
           <span style={{ marginLeft: "5px" }} onClick={toggleGlobalFilter}>
-            { disableGlobalFilter ?
-              null
-              : (
-                <div>
-                  <FaSearch style={{ cursor: "pointer" }} />
-                  { isGlobalFilterVisible ? " Hide" : " Show" }
-                </div>
-              )
-            }
+            {!disableGlobalFilter && (
+              <div>
+                <FaSearch style={{ cursor: "pointer" }} />
+                { isGlobalFilterVisible ? " Hide" : " Show" }
+              </div>
+            )}
           </span>{" "}
         </Row>
       </Container>
