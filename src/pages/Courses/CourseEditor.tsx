@@ -248,12 +248,8 @@ useEffect(() => {
                 />
 
                 <Modal.Footer>
-                  <Button variant="danger" className="btn btn-md" onClick={handleClose}>
-                    Close
-                  </Button>
-
                   <Button
-                    variant="success" className="btn btn-md"
+                    variant="danger" className="btn btn-md"
                     type="submit"
                     disabled={!(formik.isValid && formik.dirty) || formik.isSubmitting}
                   >
