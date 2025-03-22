@@ -102,7 +102,7 @@ const SubmissionHistoryView = () => {
         columns={columns}
         showGlobalFilter={false}
         showColumnFilter={false}
-        showPagination={history.length >= 10}
+        disableGlobalFilter={true}
       />
     </div>
   );

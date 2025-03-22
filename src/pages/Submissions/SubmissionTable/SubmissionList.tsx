@@ -14,6 +14,9 @@ const SubmissionList = ({ submissions, onGradeClick }: { submissions: any[], onG
         columnVisibility={{
           id: false,
         }}
+        showGlobalFilter={false}
+        showColumnFilter={false}
+        disableGlobalFilter={true}
       />
     </div>
   );

@@ -3,7 +3,6 @@ import Table from "components/Table/Table";
 import useAPI from "hooks/useAPI";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
-import { RiHealthBookLine } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { alertActions } from "store/slices/alertSlice";
@@ -13,7 +12,6 @@ import { courseColumns as COURSE_COLUMNS } from "./CourseColumns";
 import CopyCourse from "./CourseCopy";
 import DeleteCourse from "./CourseDelete";
 import { formatDate, mergeDataAndNamesAndInstructors } from "./CourseUtil";
-
 import { ICourseResponse as ICourse } from "../../utils/interfaces";
 
 /**
@@ -31,6 +29,7 @@ const Courses = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
+  
 
   // State for course details modal
   const [showDetailsModal, setShowDetailsModal] = useState<boolean>(false);
@@ -208,8 +207,6 @@ const Courses = () => {
           <Row >
             <div style={{ fontSize: "15px", lineHeight: "1.428em" }}>
               <Table
-                showGlobalFilter={false}
-                showColumnFilter={false}
                 data={visibleCourses}
                 columns={tableColumns}
                 columnVisibility={{
@@ -217,7 +214,9 @@ const Courses = () => {
                   institution: auth.user.role === ROLE.SUPER_ADMIN.valueOf(),
                   instructor: auth.user.role === ROLE.SUPER_ADMIN.valueOf(),
                 }}
-                showPagination={visibleCourses.length > 10}
+                showGlobalFilter={false}
+                showColumnFilter={false}
+                disableGlobalFilter={true}
               />
             </div>
           </Row>
