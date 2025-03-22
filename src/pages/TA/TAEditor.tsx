@@ -189,7 +189,7 @@ const TAEditor: React.FC<IEditor> = ({ mode }) => {
                   </div>
                   <Modal.Footer>
                   <Button
-                    variant="success"
+                    variant="danger"
                     className="btn btn-md"
                     onClick={handleConfirmAddStudent}
                   >
@@ -212,14 +212,11 @@ const TAEditor: React.FC<IEditor> = ({ mode }) => {
           <Modal.Title>Confirm Adding Student as TA</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Are you sure you want to add {selectedUser.label} (a student) as a Teaching Assistant for this course? 
+          Are you sure you want to add {selectedUser.label} (a student) as a teaching assistant for this course? 
           This action will convert {selectedUser.label} to a TA. 
         </Modal.Body>
         <Modal.Footer>
-        <Button variant="outline-secondary" className="btn btn-md" onClick={() => setShowConfirmModal(false)}>
-          Cancel
-        </Button>
-        <Button variant="success" className="btn btn-md" onClick={handleConfirmAddStudent}>
+        <Button variant="danger" className="btn btn-md" onClick={handleConfirmAddStudent}>
           Confirm
         </Button>
 
