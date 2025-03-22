@@ -38,8 +38,8 @@ const SubmissionEntry = ({ onGradeClick }: { onGradeClick: (id: number) => void 
       ),
       size: 25,
       enableSorting: true,
-      enableColumnFilter: false, 
-      enableGlobalFilter: false,
+      enableColumnFilter: false,
+      //enableGlobalFilter: false,
     }),
 
     // Team Members column: No search, no sorting
@@ -57,7 +57,7 @@ const SubmissionEntry = ({ onGradeClick }: { onGradeClick: (id: number) => void 
       size: 35,
       enableSorting: false,
       enableColumnFilter: false, 
-      enableGlobalFilter: false, 
+      //enableGlobalFilter: false,
     }),
     // Links and File Info column: No search, no sorting
     columnHelper.accessor(row => ({ links: row.links, fileInfo: row.fileInfo }), {
@@ -90,7 +90,7 @@ const SubmissionEntry = ({ onGradeClick }: { onGradeClick: (id: number) => void 
       size: 40,
       enableSorting: false,
       enableColumnFilter: false,
-      enableGlobalFilter: false,
+      //enableGlobalFilter: false,
     }),
     // History column: Links to history pages (No search or sorting)
     columnHelper.display({
@@ -101,7 +101,7 @@ const SubmissionEntry = ({ onGradeClick }: { onGradeClick: (id: number) => void 
       ),
       enableSorting: false,
       enableColumnFilter: false,
-      enableGlobalFilter: false,
+      // enableGlobalFilter: false,
     }),
   ];
 
