@@ -74,7 +74,7 @@ export const courseColumns = (
       <div className="d-flex justify-content-start gap-2 py-2">
         <OverlayTrigger overlay={<Tooltip>Edit Course</Tooltip>}>
           <Button
-            variant="outline-secondary"
+            variant="link"
             onClick={() => handleEdit(row)}
             aria-label="Edit Course"
             className="btn btn-md"
@@ -90,7 +90,7 @@ export const courseColumns = (
 
         <OverlayTrigger overlay={<Tooltip>Delete Course</Tooltip>}>
           <Button
-            variant="outline-secondary"
+            variant="link"
             onClick={() => handleDelete(row)}
             aria-label="Delete Course"
             className="btn btn-md"
@@ -106,7 +106,7 @@ export const courseColumns = (
 
         <OverlayTrigger overlay={<Tooltip>Assign TA</Tooltip>}>
           <Button
-            variant="outline-secondary"
+            variant="link"
             onClick={() => handleTA(row)}
             aria-label="Assign TA"
             className="btn btn-md"
@@ -122,7 +122,7 @@ export const courseColumns = (
 
         <OverlayTrigger overlay={<Tooltip>Copy Course</Tooltip>}>
           <Button
-            variant="outline-secondary"
+            variant="link"
             onClick={() => handleCopy(row)}
             aria-label="Copy Course"
             className="btn btn-md"
