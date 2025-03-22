@@ -89,12 +89,17 @@ const TAs = () => {
               <Col md={{ span: 1, offset: 11 }} style={{ paddingBottom: "10px" }}>
                 <ColumnButton
                   id="add-ta"
-                  variant="outline-success"
+                  variant="link"
                   size="lg"
                   className="ms-sm-2"
                   onClick={() => navigate("new")}
-                  tooltip="Add TA to this course"
-                  icon={<BsPersonFillAdd />}
+                  tooltip="Assign TA to this course"
+                  icon={<img
+                    src={process.env.PUBLIC_URL + "/assets/images/add-ta-24.png"}
+                    alt="Edit"
+                    width="25px"
+                    height="20px"
+                  />}
                 />
               </Col>
             </Row>

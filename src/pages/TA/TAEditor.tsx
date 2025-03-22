@@ -140,18 +140,23 @@ const TAEditor: React.FC<IEditor> = ({ mode }) => {
                     />
                   </div>
                   <Modal.Footer>
-                    <Button variant="outline-secondary" onClick={handleClose}>
-                      Close
-                    </Button>
-
                     <Button
-                      variant="outline-success"
-                      type="submit"
-                      disabled={!(formik.isValid && formik.dirty) || formik.isSubmitting}
+                      variant="secondary"
+                      className="btn btn-md"
+                      onClick={() => setShowConfirmModal(false)}
                     >
-                      Add TA
+                      Cancel
+                    </Button>
+                    <Button
+                      variant="success"
+                      className="btn btn-md"
+                      onClick={handleConfirmAddStudent}
+                    >
+                      Confirm
                     </Button>
                   </Modal.Footer>
+
+
                 </Form>
               );
             }}
