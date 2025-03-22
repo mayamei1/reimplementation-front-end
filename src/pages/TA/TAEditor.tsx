@@ -162,7 +162,7 @@ const TAEditor: React.FC<IEditor> = ({ mode }) => {
               return (
                 <Form>
                   <div className="mb-3">
-                    <label htmlFor="TA-name">Teaching Assistant Name</label>
+                    <label htmlFor="TA-name">Teaching assistant name</label>
                     <Select
                       id="TA-name"
                       name="name"
@@ -184,13 +184,6 @@ const TAEditor: React.FC<IEditor> = ({ mode }) => {
                     />
                   </div>
                   <Modal.Footer>
-                  <Button
-                    variant="outline-secondary"
-                    className="btn btn-md"
-                    onClick={() => setShowConfirmModal(false)}
-                  >
-                    Cancel
-                  </Button>
                   <Button
                     variant="success"
                     className="btn btn-md"
