@@ -113,7 +113,6 @@ const TAEditor: React.FC<IEditor> = ({ mode }) => {
  
     if (selectedUserData?.role === 'student') {
       // If selected user is a student, show confirmation modal
-      console.log("Student role detected...", selectedUserData);
       setSelectedUser(selectedUserData);
       setShowConfirmModal(true);
     } else {
@@ -188,17 +187,15 @@ const TAEditor: React.FC<IEditor> = ({ mode }) => {
                     />
                   </div>
                   <Modal.Footer>
-                  <Button
-                    variant="danger"
-                    className="btn btn-md"
-                    onClick={handleConfirmAddStudent}
-                  >
-                    Confirm
-                </Button>
-
+                    <Button
+                      variant="danger"
+                      type="submit"
+                      className="btn btn-md"
+                      disabled={!(formik.isValid && formik.dirty) || formik.isSubmitting}
+                    >
+                      Confirm
+                    </Button>
                   </Modal.Footer>
-
-
                 </Form>
               );
             }}
