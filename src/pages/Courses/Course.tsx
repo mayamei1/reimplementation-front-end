@@ -186,7 +186,7 @@ const Courses = () => {
 
           <Col md={{ span: 1, offset: 11 }} style={{ paddingBottom: "10px" }}>
               <Button className="btn pull-right new-button btn-md" variant="danger" onClick={() => navigate("new")}>
-                Create course
+                Create
               </Button>
             </Col>
           </Row>
