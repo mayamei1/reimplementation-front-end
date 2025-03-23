@@ -112,13 +112,15 @@ const TAs = () => {
             ) : (
               <Row>
                 <Table
-                  showGlobalFilter={false}
                   data={tableData}
                   columns={tableColumns}
                   columnVisibility={{
                     id: false,
                     institution: auth.user.role === ROLE.SUPER_ADMIN.valueOf(),
                   }}
+                  showGlobalFilter={false}
+                  showColumnFilter={false}
+                  disableGlobalFilter={true}
                 />
               </Row>
             )}
