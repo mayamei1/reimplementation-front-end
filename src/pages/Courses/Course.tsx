@@ -170,7 +170,7 @@ const Courses = () => {
         <Container fluid className="px-md-4">
           <Row className="mt-4 mb-4">
             <Col className="text-center">
-              <h1 className="text-dark" style={{ fontSize: "2rem", fontWeight: "600" }}>
+              <h2>
                 {auth.user.role === ROLE.INSTRUCTOR.valueOf() ? (
                   <>Instructed by: {auth.user.full_name}</>
                 ) : auth.user.role === ROLE.TA.valueOf() ? (
@@ -178,7 +178,7 @@ const Courses = () => {
                 ) : (
                   <>Manage Courses</>
                 )}
-              </h1>
+              </h2>
             </Col>
           </Row>
 

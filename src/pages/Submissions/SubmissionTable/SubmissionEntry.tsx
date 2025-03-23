@@ -17,17 +17,7 @@ const SubmissionEntry = ({ onGradeClick }: { onGradeClick: (id: number) => void 
   const columns = [
     // Team Name column: Sorting enabled, search disabled
     columnHelper.accessor('teamName', {
-      header: ({ column }) => (
-        <div
-          onClick={column.getToggleSortingHandler()} // Toggle sorting on click
-          style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
-        >
-          Team name
-          {
-            !column.getIsSorted() && <span> ⬍</span>
-          }
-        </div>
-      ),
+      header: () => "Team name",
       cell: (info) => (
         <>
           <div>{info.getValue()}</div>
@@ -64,30 +54,76 @@ const SubmissionEntry = ({ onGradeClick }: { onGradeClick: (id: number) => void 
       id: 'links',
       header: () => 'Links',
       cell: (info) => (
-      <div>
+      <div style={{ width: '450px' }}>
         {info.getValue().links.map((link, idx) => (
           <div key={idx}>
             <a href={link.url}>{link.displayName}</a>
           </div>
         ))}
-        <br/>
+        <br />
         <div>
           <div style={{ display: 'flex', fontWeight: 'bold' }}>
-            <div style={{ width: '33%' }}>Name</div>
-            <div style={{ width: '33%' }}>Size</div>
-            <div style={{ width: '33%' }}>Date Modified</div>
+            <div
+              style={{
+                width: '40%',
+              }}
+            >
+              Name
+            </div>
+            <div
+              style={{
+                width: '20%',
+                overflow: 'visible',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              Size
+            </div>
+            <div
+              style={{
+                width: '40%',
+                overflow: 'visible',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              Date modified
+            </div>
           </div>
           {info.getValue().fileInfo.map((file, idx) => (
             <div key={idx} style={{ display: 'flex' }}>
-              <div style={{ width: '33%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{file.name}</div>
-              <div style={{ width: '33%' }}>{file.size}</div>
-              <div style={{ width: '33%' }}>{file.dateModified}</div>
+              <div
+                style={{
+                  width: '40%',
+                  overflow: 'visible',
+                textOverflow: 'ellipsis',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                {file.name}
+              </div>
+              <div
+                style={{
+                  width: '20%',
+                  overflow: 'visible',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                {file.size}
+              </div>
+              <div
+                style={{
+                  width: '40%',
+                  overflow: 'visible',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                {file.dateModified}
+              </div>
             </div>
           ))}
         </div>
       </div>
       ),
-      size: 40,
       enableSorting: false,
       enableColumnFilter: false,
       enableGlobalFilter: false,
