@@ -20,12 +20,12 @@ export const TAColumns = (handleDelete: Fn) => [
   }),
   //create TA Name column Header
   columnHelper.accessor("name", {
-    header: "TA Name",
+    header: "TA name",
     enableSorting: true,
   }),
   //create Full TA Name column Header
   columnHelper.accessor("full_name", {
-    header: "Full Name",
+    header: "Full name",
     enableSorting: true,
     enableMultiSort: true,
   }),
