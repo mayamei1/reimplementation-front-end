@@ -22,7 +22,7 @@ const SubmissionEntry = ({ onGradeClick }: { onGradeClick: (id: number) => void 
           onClick={column.getToggleSortingHandler()} // Toggle sorting on click
           style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
         >
-          Team Name
+          Team name
           {
             !column.getIsSorted() && <span> ⬍</span>
           }
@@ -32,7 +32,7 @@ const SubmissionEntry = ({ onGradeClick }: { onGradeClick: (id: number) => void 
         <>
           <div>{info.getValue()}</div>
           <Button variant="link" onClick={() => onGradeClick(info.row.original.id)}>
-            Assign Grade
+            Assign grade
           </Button>
         </>
       ),
@@ -44,7 +44,7 @@ const SubmissionEntry = ({ onGradeClick }: { onGradeClick: (id: number) => void 
 
     // Team Members column: No search, no sorting
     columnHelper.accessor('members', {
-      header: () => 'Team Members',
+      header: () => 'Team members',
       cell: (info) =>
         info.getValue().map((member) => (
           <div key={member.id}>
