@@ -93,7 +93,7 @@ const TAs = () => {
                   size="lg"
                   className="ms-sm-2"
                   onClick={() => navigate("new")}
-                  tooltip="Assign TA to this course"
+                  tooltip="Assign TA"
                   icon={<img
                     src={process.env.PUBLIC_URL + "/assets/images/add-ta-24.png"}
                     alt="Edit"
