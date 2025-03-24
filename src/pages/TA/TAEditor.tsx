@@ -25,49 +25,6 @@ type UserOption = {
   role?: string;
 };
 
-const customSelectStyles = {
-  control: (provided: any, state: any) => ({
-    ...provided,
-    borderColor: state.isFocused ? '#ced4da' : '#ced4da',
-    boxShadow: 'none',
-    '&:hover': {
-      borderColor: '#adb5bd'
-    },
-    fontSize: '1rem',
-    borderRadius: '0.25rem',
-    minHeight: '38px',
-  }),
-  placeholder: (provided: any) => ({
-    ...provided,
-    color: '#6c757d',
-    fontSize: '0.95rem'
-  }),
-  menu: (provided: any) => ({
-    ...provided,
-    zIndex: 9999,
-    border: '1px solid #ced4da',
-    borderRadius: '0.25rem',
-    boxShadow: '0 0 0.25rem rgba(0,0,0,0.05)',
-  }),
-  option: (provided: any, state: any) => ({
-    ...provided,
-    backgroundColor: state.isSelected
-      ? '#d4edda' // light green for selected
-      : state.isFocused
-      ? '#f8f9fa' // light gray for hover/focus
-      : 'white',
-    color: '#212529',
-    fontSize: '0.95rem',
-    padding: '10px 12px',
-    cursor: 'pointer',
-  }),
-  singleValue: (provided: any) => ({
-    ...provided,
-    color: '#212529',
-    fontSize: '0.95rem',
-  }),
-};
-
 const initialValues: ITAFormValues = {
   name: "",
 };
@@ -169,7 +126,6 @@ const TAEditor: React.FC<IEditor> = ({ mode }) => {
                     <Select
                       id="TA-name"
                       name="name"
-                      styles={customSelectStyles}
                       options={taUsers}
                       value={taUsers.find((option: UserOption) => option.value === formik.values.name) || null}
                       onChange={(selectedOption: UserOption | null) => {
