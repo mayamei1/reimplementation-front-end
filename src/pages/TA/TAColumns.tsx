@@ -41,12 +41,17 @@ export const TAColumns = (handleDelete: Fn) => [
       <>
         <ColumnButton
           id="delete-ta"
-          variant="outline-danger"
+          variant="danger"
           size="sm"
-          className="ms-sm-2"
+          className="p-0 m-0 border-0 bg-transparent"
           onClick={() => handleDelete(row)}
           tooltip="Delete TA"
-          icon={<BsPersonXFill />}
+          icon={<img
+            src={process.env.PUBLIC_URL + "/assets/images/delete-icon-24.png"}
+            alt="Remove TA"
+            width="25px"
+            height="20px"
+          />}
         />
       </>
     ),
